@@ -52,11 +52,14 @@ const buildTodoItem = (todo) => {
   const removeButtonElement = todoItemElement.querySelector('#todoItemRemove');
   if (removeButtonElement) {
     removeButtonElement.addEventListener('click', (e) => handleRemoveButtonClick(e, todoItemElement));
+    removeButtonElement.removeAttribute('id');
   }
+
 
   const editButtonElement = todoItemElement.querySelector('#todoItemEdit');
   if (editButtonElement) {
     editButtonElement.addEventListener('click', (e) => handleEditButtonClick(e, todo));
+    editButtonElement.removeAttribute('id');
   }
 
   return todoItemElement;
@@ -107,6 +110,13 @@ const resetTodoForm = () => {
   const todoForm = document.querySelector('#todoForm');
   todoForm.reset();
   todoForm.removeAttribute('data-todo-id');
+
+  const submitButton = todoForm.querySelector('button[type=submit]');
+  if (submitButton) {
+    submitButton.classList.remove('btn-success');
+    submitButton.classList.add('btn-primary');
+    submitButton.innerText = 'Add to list';
+  }
 };
 
 const handleTodoFormSubmit = (e) => {
